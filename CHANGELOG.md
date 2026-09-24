@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Load regular and bold Meslo LGM Nerd Font Mono from the Home Assistant `/local/` web path.
+
 ## 0.1.4
 
 - Prefer Meslo LGM Nerd Font Mono in the browser terminal so Oh My Posh glyphs render when the font is installed on the client computer.

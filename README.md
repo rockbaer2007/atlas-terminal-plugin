@@ -26,9 +26,10 @@ installieren. Das Add-on muss eine kompatible Terminal-Backend-Version
 enthalten.
 
 Die Theme-Auswahl benötigt mindestens ATLAS `0.2.0-alpha.79` beziehungsweise
-Home-Assistant-App/Add-on `0.1.211`. Die Meslo-Schriftpräferenz benötigt
-mindestens Add-on `0.1.212`; Meslo muss auf dem Rechner installiert sein, auf
-dem du das Terminal im Browser öffnest.
+Home-Assistant-App/Add-on `0.1.211`. Das Laden der Meslo-Schrift aus Home
+Assistant benötigt mindestens Add-on `0.1.214` und die Dateien
+`MesloLGMNerdFontMono-Regular.ttf` sowie `MesloLGMNerdFontMono-Bold.ttf` unter
+`/config/www/fonts/` oder direkt unter `/config/www/`.
 
 ## Sicherheit und Einrichtung
 
