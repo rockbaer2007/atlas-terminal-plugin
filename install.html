@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Eigenständiges ATLAS Terminal Plugin-Repository hinzufügen.">
+    <title>ATLAS Terminal Plugin installieren</title>
+    <style>
+      :root { color-scheme: light dark; --bg:#eef4f6; --panel:#fff; --text:#132432; --muted:#607485; --border:#ccd9df; --accent:#0f8f83; font:16px/1.5 system-ui,sans-serif; }
+      * { box-sizing:border-box; }
+      body { margin:0; min-height:100vh; background:var(--bg); color:var(--text); }
+      main { width:min(900px,calc(100vw - 32px)); margin:auto; padding:32px 0; }
+      section { margin-bottom:16px; padding:26px; border:1px solid var(--border); border-radius:12px; background:var(--panel); }
+      h1,h2,p { margin-top:0; } h1 { font-size:clamp(2rem,6vw,3.5rem); line-height:1.05; }
+      .eyebrow { color:var(--accent); font-size:.8rem; font-weight:800; text-transform:uppercase; }
+      .url { width:100%; padding:12px; border:1px solid var(--border); border-radius:8px; font:inherit; }
+      button { margin:10px 0; padding:0; border:0; background:none; cursor:pointer; }
+      button img { display:block; width:min(480px,100%); height:auto; }
+      .muted { color:var(--muted); }
+      @media (prefers-color-scheme:dark) { :root { --bg:#0e1214; --panel:#171d20; --text:#f4f8fa; --muted:#a9bac4; --border:#303c42; --accent:#2dd4bf; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <p class="eyebrow">Eigenständiges Plugin-Repository</p>
+        <h1>ATLAS Terminal</h1>
+        <p class="muted">Füge das Repository in der ATLAS Administration hinzu. Es ist kein Home-Assistant-Add-on-Store-Repository.</p>
+        <button id="copy" type="button" aria-label="ATLAS Repository hinzufügen"><img src="assets/atlas-repository-button.svg" alt="ATLAS Repository hinzufügen"></button>
+        <p id="status" class="muted" aria-live="polite"></p>
+      </section>
+      <section>
+        <h2>Repository-Manifest</h2>
+        <input id="url" class="url" readonly value="https://raw.githubusercontent.com/rockbaer2007/atlas-terminal-plugin/main/repository.json">
+        <ol>
+          <li>ATLAS Administration öffnen und <strong>Plugin-Repository hinzufügen</strong> wählen.</li>
+          <li>Die URL einfügen, Repository prüfen und hinzufügen.</li>
+          <li>Das Terminal-Paket installieren. Ein kompatibles ATLAS-Terminal-Backend muss vorhanden sein.</li>
+        </ol>
+      </section>
+      <section>
+        <h2>Sicherheitshinweis</h2>
+        <p class="muted">Das Terminal gewährt Shellzugriff mit den Rechten des ATLAS-Hosts. Aktiviere es nur mit einem starken Zugriffstoken und in einem vertrauenswürdigen Browserprofil.</p>
+      </section>
+    </main>
+    <script>
+      const url = document.querySelector("#url");
+      const status = document.querySelector("#status");
+      document.querySelector("#copy").addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(url.value); status.textContent = "Repository-URL kopiert. In ATLAS Administration einfügen."; }
+        catch { url.select(); status.textContent = "Kopieren nicht möglich. Die URL ist unten markiert."; }
+      });
+      url.addEventListener("click", () => url.select());
+    </script>
+  </body>
+</html>

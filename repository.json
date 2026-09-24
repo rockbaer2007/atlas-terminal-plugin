@@ -1,0 +1,49 @@
+{
+  "kind": "atlas.plugin.repository",
+  "atlas": {
+    "type": "plugin-repository",
+    "schemaVersion": 1
+  },
+  "name": "ATLAS Terminal Plugin Repository",
+  "version": "1",
+  "homepage": "https://github.com/rockbaer2007/atlas-terminal-plugin",
+  "installPage": "https://rockbaer2007.github.io/atlas-terminal-plugin/install.html",
+  "maintainer": "UGSo Software",
+  "plugins": [
+    {
+      "id": "atlas.plugin.terminal",
+      "atlas": {
+        "type": "plugin",
+        "schemaVersion": 1
+      },
+      "name": "ATLAS Terminal",
+      "nameI18n": {
+        "de": "ATLAS Terminal",
+        "en": "ATLAS Terminal"
+      },
+      "version": "0.1.1",
+      "description": "Authenticated local web terminal and optional SSH terminal with adjustable font size and ANSI colors.",
+      "descriptionI18n": {
+        "de": "Authentifiziertes lokales Webterminal und optionales SSH-Terminal mit einstellbarer Schriftgröße und ANSI-Farben.",
+        "en": "Authenticated local web terminal and optional SSH terminal with adjustable font size and ANSI colors."
+      },
+      "homepage": "https://github.com/rockbaer2007/atlas-terminal-plugin",
+      "installPage": "https://rockbaer2007.github.io/atlas-terminal-plugin/install.html",
+      "icon": "./plugins/terminal/icon.svg",
+      "entry": "/plugin-assets/terminal/index.html",
+      "package": "./plugins/terminal/atlas-plugin-terminal.atlas-plugin.json",
+      "manifest": "./plugins/terminal/atlas-plugin.json",
+      "capabilities": [
+        "atlas.terminal.local-shell",
+        "atlas.terminal.ssh",
+        "atlas.terminal.ansi-colors",
+        "atlas.terminal.font-size"
+      ],
+      "compatibility": {
+        "atlas": ">=0.2.0-alpha.76",
+        "host": "administration-local",
+        "homeAssistant": ">=2026.8"
+      }
+    }
+  ]
+}
