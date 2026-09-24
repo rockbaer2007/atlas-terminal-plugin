@@ -41,6 +41,8 @@ Optionales SSH benötigt einen serverseitig festgelegten Host, Benutzer,
 privaten Schlüssel und `known_hosts`-Datei. Die Hostschlüsselprüfung bleibt
 aktiv; das Browserfenster kann kein beliebiges Ziel auswählen.
 
+Über **Zurück zum Hub** in der Terminal-Kopfzeile gelangst du wieder zum ATLAS Plugin-Hub.
+
 ## Entwicklung
 
 Die ausgelieferten Dateien liegen unter `plugins/terminal`. `app.js` und
