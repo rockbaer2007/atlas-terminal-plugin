@@ -26,7 +26,9 @@ installieren. Das Add-on muss eine kompatible Terminal-Backend-Version
 enthalten.
 
 Die Theme-Auswahl benötigt mindestens ATLAS `0.2.0-alpha.79` beziehungsweise
-Home-Assistant-App/Add-on `0.1.211`. Ältere Host-Versionen zeigen kein Theme-Feld.
+Home-Assistant-App/Add-on `0.1.211`. Die Meslo-Schriftpräferenz benötigt
+mindestens Add-on `0.1.212`; Meslo muss auf dem Rechner installiert sein, auf
+dem du das Terminal im Browser öffnest.
 
 ## Sicherheit und Einrichtung
 
