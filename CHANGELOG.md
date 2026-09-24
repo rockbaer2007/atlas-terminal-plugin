@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3
+
+- Add a theme dropdown backed by the UGSo Oh My Posh theme fork.
+- Apply the selected theme to local Bash sessions when the ATLAS host has Oh My Posh installed.
+- Remember the selected theme in the current browser.
+
 ## 0.1.2
 
 - Add a localized toolbar link to return to the ATLAS Plugin Hub.

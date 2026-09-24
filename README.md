@@ -1,5 +1,7 @@
 # ATLAS Terminal Plugin
 
+Das Terminal kann Themes aus dem [UGSo-Oh-My-Posh-Fork](https://github.com/rockbaer2007/oh-my-posh) auswählen. Die Themes werden in lokalen Bash-Sitzungen angewendet, wenn Oh My Posh und Bash auf dem ATLAS-Host installiert sind. Bei SSH bleibt die Shell des Zielservers unverändert.
+
 Eigenständiges GitHub-Repository für das ATLAS-Terminal-Plugin. Das Terminal
 stellt ein Browser-Terminal mit ANSI-Farben, einstellbarer Schriftgröße und
 optionalem SSH-Ziel bereit. Der Prompt ist von Oh My Posh inspiriert.
@@ -22,6 +24,9 @@ In ATLAS Administration unter **Plugins → Repository hinzufügen** den Typ
 **Plugin** wählen, die Manifest-URL einfügen und anschließend das Plugin-Paket
 installieren. Das Add-on muss eine kompatible Terminal-Backend-Version
 enthalten.
+
+Die Theme-Auswahl benötigt mindestens ATLAS `0.2.0-alpha.79` beziehungsweise
+Home-Assistant-App/Add-on `0.1.211`. Ältere Host-Versionen zeigen kein Theme-Feld.
 
 ## Sicherheit und Einrichtung
 
