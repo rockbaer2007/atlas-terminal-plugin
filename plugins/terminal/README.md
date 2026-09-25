@@ -14,6 +14,10 @@ Configure `ATLAS_TERMINAL_SSH_HOST`, `ATLAS_TERMINAL_SSH_USER`, `ATLAS_TERMINAL_
 
 For Docker, mount the SSH key and `known_hosts` read-only into the container before enabling SSH. Add the terminal variables to the Compose environment or a protected `.env` file; never commit tokens or private keys.
 
+## Session behavior
+
+The access-token settings are collapsible. They close when a session connects and reopen after disconnecting or when the session ends. If this browser has no saved token, the settings are open on initial load. Local shell sessions start at `/`, the filesystem root inside the ATLAS container, instead of `/app`; SSH sessions keep the remote shell's default directory.
+
 ## UI settings
 
 Switch the interface between German and English. Use the slider to set a font size from 11 to 26 px; the choice is saved locally in the browser. The terminal loads `MesloLGM Nerd Font Mono` from Home Assistant's `/local/fonts/` path (or `/local/`) and falls back to other monospace fonts if the files are unavailable. When the ATLAS host has Oh My Posh and Bash installed, select a theme from the dropdown for local terminal sessions. The theme list comes from the UGSo fork and the selection is saved in this browser. SSH sessions use the remote server's own shell and do not apply a local theme. ANSI colors are rendered by xterm.js.

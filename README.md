@@ -1,5 +1,7 @@
 # ATLAS Terminal Plugin
 
+**Sprachen:** [Deutsch](README.md) · [English](README.en.md) · [Français](README.fr.md)
+
 Das Terminal kann Themes aus dem [UGSo-Oh-My-Posh-Fork](https://github.com/rockbaer2007/oh-my-posh) auswählen. Die Themes werden in lokalen Bash-Sitzungen angewendet, wenn Oh My Posh und Bash auf dem ATLAS-Host installiert sind. Bei SSH bleibt die Shell des Zielservers unverändert.
 
 Eigenständiges GitHub-Repository für das ATLAS-Terminal-Plugin. Das Terminal
@@ -30,6 +32,8 @@ Home-Assistant-App/Add-on `0.1.211`. Das Laden der Meslo-Schrift aus Home
 Assistant benötigt mindestens Add-on `0.1.214` und die Dateien
 `MesloLGMNerdFontMono-Regular.ttf` sowie `MesloLGMNerdFontMono-Bold.ttf` unter
 `/config/www/fonts/` oder direkt unter `/config/www/`.
+Das Root-Startverzeichnis und das automatische Ein-/Ausklappen der Token-Einstellungen
+benötigen App/Add-on `0.1.215` oder neuer.
 
 ## Sicherheit und Einrichtung
 
@@ -50,6 +54,12 @@ privaten Schlüssel und `known_hosts`-Datei. Die Hostschlüsselprüfung bleibt
 aktiv; das Browserfenster kann kein beliebiges Ziel auswählen.
 
 Über **Zurück zum Hub** in der Terminal-Kopfzeile gelangst du wieder zum ATLAS Plugin-Hub.
+
+Die Token-Einstellungen sind einklappbar: Beim Verbinden schließen sie sich und
+beim Trennen oder Sitzungsende öffnen sie sich wieder. Ohne gespeichertes Token
+bleiben sie beim ersten Aufruf geöffnet. Lokale Shell-Sitzungen starten im
+Dateisystem-Root `/` innerhalb des ATLAS-Containers statt in `/app`; bei SSH
+bleibt das Standardverzeichnis des Zielservers maßgeblich.
 
 ## Entwicklung
 
