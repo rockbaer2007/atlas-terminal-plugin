@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- Add the ATLAS brand overlay to the terminal icon.
+
 ## 0.1.5
 
 - Load regular and bold Meslo LGM Nerd Font Mono from the Home Assistant `/local/` web path.
