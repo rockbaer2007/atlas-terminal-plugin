@@ -4,6 +4,7 @@ import "@xterm/xterm/css/xterm.css";
 
 const terminalElement = document.querySelector("#terminal");
 const tokenInput = document.querySelector("#access-token");
+const connectionPanel = document.querySelector("#connection-panel");
 const connectButton = document.querySelector("#connect");
 const disconnectButton = document.querySelector("#disconnect");
 const targetSelect = document.querySelector("#target-select");
@@ -19,7 +20,7 @@ const translations = {
     targetLabel: "Ziel", localTarget: "ATLAS lokal", sshTarget: "Home Assistant · SSH",
     themeLabel: "Oh-My-Posh-Theme", defaultTheme: "Standard", themesUnavailable: "Themes konnten nicht geladen werden",
     fontSize: "Schriftgröße", connect: "Verbinden", disconnect: "Trennen",
-    tokenLabel: "Terminal-Zugriffstoken", tokenPlaceholder: "Serverseitig konfiguriertes Token eingeben",
+    tokenSettings: "Token-Einstellungen", tokenLabel: "Terminal-Zugriffstoken", tokenPlaceholder: "Serverseitig konfiguriertes Token eingeben",
     show: "Anzeigen", hide: "Verbergen", forgetToken: "Gespeichertes Token löschen",
     tokenHelp: "Das Token wird lokal in diesem Browser gespeichert und nur zum Verbinden an den Server gesendet.",
     disconnected: "Getrennt", footer: "ANSI-Farben · Oh-My-Posh-inspirierter Shell-Prompt",
@@ -33,7 +34,7 @@ const translations = {
     targetLabel: "Target", localTarget: "ATLAS local", sshTarget: "Home Assistant · SSH",
     themeLabel: "Oh My Posh theme", defaultTheme: "Default", themesUnavailable: "Could not load themes",
     fontSize: "Font size", connect: "Connect", disconnect: "Disconnect",
-    tokenLabel: "Terminal access token", tokenPlaceholder: "Enter the token configured on the server",
+    tokenSettings: "Access token settings", tokenLabel: "Terminal access token", tokenPlaceholder: "Enter the token configured on the server",
     show: "Show", hide: "Hide", forgetToken: "Forget saved token",
     tokenHelp: "The token is stored locally in this browser and sent to the server only when connecting.",
     disconnected: "Disconnected", footer: "ANSI colors · Oh My Posh-inspired shell prompt",
@@ -42,6 +43,20 @@ const translations = {
     connected: "Connected", badToken: "Access denied: check the token", denied: "Terminal disabled or origin not allowed",
     failed: "Terminal connection failed",
   },
+  fr: {
+    backToHub: "Retour au hub",
+    targetLabel: "Cible", localTarget: "ATLAS local", sshTarget: "Home Assistant · SSH",
+    themeLabel: "Thème Oh My Posh", defaultTheme: "Par défaut", themesUnavailable: "Impossible de charger les thèmes",
+    fontSize: "Taille de police", connect: "Connecter", disconnect: "Déconnecter",
+    tokenSettings: "Paramètres du jeton", tokenLabel: "Jeton d’accès au terminal", tokenPlaceholder: "Saisissez le jeton configuré sur le serveur",
+    show: "Afficher", hide: "Masquer", forgetToken: "Oublier le jeton enregistré",
+    tokenHelp: "Le jeton est enregistré dans ce navigateur et envoyé au serveur uniquement lors de la connexion.",
+    disconnected: "Déconnecté", footer: "Couleurs ANSI · Invite shell inspirée d’Oh My Posh",
+    banner: "Un jeton d’accès configuré sur le serveur est nécessaire pour se connecter.", tokenRequired: "Saisissez un jeton d’accès valide",
+    disabled: "Le terminal est désactivé sur le serveur", configError: "Impossible de charger la configuration du serveur",
+    connected: "Connecté", badToken: "Accès refusé : vérifiez le jeton", denied: "Terminal désactivé ou origine non autorisée",
+    failed: "Échec de la connexion au terminal",
+  },
 };
 let currentLanguage = readLanguage();
 const socketPath = `${location.pathname.replace(/\/index\.html$/, "").replace(/\/$/, "")}/socket`;
@@ -49,6 +64,7 @@ let socket;
 let accessToken = "";
 const tokenStorageKey = "atlas.terminal.accessToken";
 tokenInput.value = readStoredToken();
+connectionPanel.open = !tokenInput.value;
 
 const terminal = new Terminal({
   cursorBlink: true,
@@ -74,9 +90,14 @@ applyLanguage();
 terminal.writeln(`\x1b[1;36mATLAS Terminal\x1b[0m  ·  \x1b[90m${translate("banner")}\x1b[0m`);
 
 function readLanguage() {
+  const requested = new URL(location.href).searchParams.get("language");
+  if (requested === "de" || requested === "en" || requested === "fr") return requested;
+  const preference = localStorage.getItem("atlas.languagePreference");
+  if (preference === "de" || preference === "en" || preference === "fr") return preference;
   const stored = localStorage.getItem("atlas.terminal.language");
-  if (stored === "de" || stored === "en") return stored;
-  return navigator.language?.toLowerCase().startsWith("en") ? "en" : "de";
+  if (stored === "de" || stored === "en" || stored === "fr") return stored;
+  const browserLanguage = navigator.language?.toLowerCase() ?? "";
+  return browserLanguage.startsWith("fr") ? "fr" : browserLanguage.startsWith("en") ? "en" : "de";
 }
 
 function translate(key) {
@@ -85,6 +106,7 @@ function translate(key) {
 
 function applyLanguage() {
   document.documentElement.lang = currentLanguage;
+  localStorage.setItem("atlas.languagePreference", currentLanguage);
   document.querySelectorAll("[data-i18n]").forEach(element => {
     element.textContent = translate(element.dataset.i18n);
   });
@@ -198,6 +220,7 @@ function showThemeOptions(names) {
 function connect() {
   accessToken = tokenInput.value.trim();
   if (accessToken.length < 32) {
+    connectionPanel.open = true;
     setStatus(translate("tokenRequired"), "error");
     tokenInput.focus();
     return;
@@ -218,6 +241,7 @@ function connect() {
     targetSelect.disabled = true;
     themeSelect.disabled = true;
     tokenInput.disabled = true;
+    connectionPanel.open = false;
     setStatus(translate("connected"), "connected");
     terminal.clear();
     fitAddon.fit();
@@ -241,6 +265,7 @@ function connect() {
     if (event.code === 4401) setStatus(translate("badToken"), "error");
     else if (event.code === 4403) setStatus(translate("denied"), "error");
     else setStatus(translate("disconnected"));
+    connectionPanel.open = true;
     resetControls();
   });
   socket.addEventListener("error", () => setStatus(translate("failed"), "error"));
@@ -255,6 +280,7 @@ function disconnect() {
   socket = undefined;
   accessToken = "";
   tokenInput.disabled = false;
+  connectionPanel.open = true;
   resetControls();
 }
 
@@ -286,6 +312,7 @@ tokenInput.addEventListener("input", () => saveStoredToken(tokenInput.value));
 document.querySelector("#forget-token").addEventListener("click", () => {
   saveStoredToken("");
   tokenInput.value = "";
+  connectionPanel.open = true;
   tokenInput.focus();
 });
 document.querySelector("#toggle-token").addEventListener("click", event => {
