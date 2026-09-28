@@ -35,6 +35,17 @@ Assistant benötigt mindestens Add-on `0.1.214` und die Dateien
 Das Root-Startverzeichnis und das automatische Ein-/Ausklappen der Token-Einstellungen
 benötigen App/Add-on `0.1.215` oder neuer.
 
+### Fehlersuche: Nerd-Font-Glyphen auf anderen Rechnern
+
+Es wurde beobachtet, dass Oh-My-Posh-Symbole auf einem Rechner korrekt und auf
+einem anderen unvollständig dargestellt werden. Eine lokal installierte Nerd
+Font kann dabei eine fehlende oder nicht geladene Webfont auf dem ersten Rechner
+verdecken. Wenn Glyphen fehlen, auf dem betroffenen Rechner im Browser prüfen,
+ob die Meslo-Dateien unter `/local/fonts/` tatsächlich geladen und als Terminal-
+Schrift verwendet werden; danach gegebenenfalls den Browser-Cache leeren. Oh My
+Posh selbst läuft auf dem ATLAS-Host; die Fontdarstellung wird vom Browserclient
+gerendert.
+
 ## Sicherheit und Einrichtung
 
 Das Terminal bleibt standardmäßig deaktiviert. Aktiviere es erst, nachdem du

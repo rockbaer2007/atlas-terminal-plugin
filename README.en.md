@@ -8,6 +8,10 @@ ATLAS Terminal is a standalone plugin frontend for an authenticated browser term
 
 The access-token settings are collapsible. They close when a session connects and reopen after disconnecting or when the session ends. If this browser has no saved token, the settings are open on initial load. Local shell sessions start at `/`, the filesystem root inside the ATLAS container, instead of `/app`. SSH sessions keep the remote server's default working directory.
 
+## Troubleshooting: Nerd Font glyphs on other computers
+
+Oh My Posh symbols have been observed rendering correctly on one computer but incompletely on another. A Nerd Font installed locally may hide a missing or unloaded web font on the first computer. If glyphs are missing, check in the affected browser that the Meslo files under `/local/fonts/` actually load and that the terminal uses that font; clear the browser cache if needed. Oh My Posh itself runs on the ATLAS host, while the browser client renders the font.
+
 ## Setup and security
 
 Add the plugin through [ATLAS Administration](https://rockbaer2007.github.io/atlas-terminal-plugin/install.html). The terminal is disabled by default and requires a strong, random token of at least 32 URL-safe characters on the ATLAS host. The token stays in local browser storage and is sent during connection setup through the WebSocket subprotocol, not in a URL. Use the terminal only in a trusted browser profile; local shell access has the permissions of the ATLAS process.
