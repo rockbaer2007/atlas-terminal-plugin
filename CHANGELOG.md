@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.8
+
+- Use the shared Plugin Hub label for toolbar navigation in German, English and French.
+
+## 0.1.7
+
+- Add French UI support.
+
 ## 0.1.6
 
 - Add the ATLAS brand overlay to the terminal icon.

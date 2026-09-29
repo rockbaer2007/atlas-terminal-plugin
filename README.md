@@ -64,7 +64,7 @@ Optionales SSH benötigt einen serverseitig festgelegten Host, Benutzer,
 privaten Schlüssel und `known_hosts`-Datei. Die Hostschlüsselprüfung bleibt
 aktiv; das Browserfenster kann kein beliebiges Ziel auswählen.
 
-Über **Zurück zum Hub** in der Terminal-Kopfzeile gelangst du wieder zum ATLAS Plugin-Hub.
+Über **Plugin Hub** in der Terminal-Kopfzeile gelangst du wieder zum ATLAS Plugin Hub.
 
 Die Token-Einstellungen sind einklappbar: Beim Verbinden schließen sie sich und
 beim Trennen oder Sitzungsende öffnen sie sich wieder. Ohne gespeichertes Token
