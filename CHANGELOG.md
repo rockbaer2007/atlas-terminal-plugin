@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.9
+
+- Standardize the Plugin Hub and language controls in the upper-right toolbar and match the ATLAS theme.
+
 ## 0.1.8
 
 - Use the shared Plugin Hub label for toolbar navigation in German, English and French.
