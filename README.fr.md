@@ -14,6 +14,13 @@ Il a été constaté que les symboles Oh My Posh s'affichent correctement sur un
 
 ## Installation et sécurité
 
+Depuis le plugin 0.1.10, `compatibility.atlas` désigne l’App/runtime
+`>=0.1.215 <0.2.0`, et non l’ancienne version alpha du framework. L’hôte
+`administration-local` et Home Assistant `>=2026.8` restent requis. Sauvegardez
+les descripteurs partagés existants et vérifiez leur révision avant correction ;
+actualiser le catalogue ne les corrige pas. Les sauvegardes de restauration
+conservent leurs exigences initiales et restent bloquées si elles sont incompatibles.
+
 Ajoutez le plugin depuis [l'Administration ATLAS](https://rockbaer2007.github.io/atlas-terminal-plugin/install.html). Le terminal est désactivé par défaut et nécessite sur l'hôte ATLAS un jeton robuste, aléatoire et d'au moins 32 caractères sûrs pour les URL. Le jeton reste dans le stockage local du navigateur et est transmis lors de la connexion via le sous-protocole WebSocket, jamais dans une URL. Utilisez le terminal uniquement dans un profil de navigateur de confiance ; le shell local dispose des droits du processus ATLAS.
 
 La connexion SSH facultative doit être configurée côté serveur avec un hôte, un utilisateur, une clé privée et un fichier `known_hosts`. La vérification de la clé d'hôte reste active et le navigateur ne peut pas choisir une cible arbitraire.

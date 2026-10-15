@@ -27,8 +27,15 @@ In ATLAS Administration unter **Plugins → Repository hinzufügen** den Typ
 installieren. Das Add-on muss eine kompatible Terminal-Backend-Version
 enthalten.
 
-Die Theme-Auswahl benötigt mindestens ATLAS `0.2.0-alpha.79` beziehungsweise
-Home-Assistant-App/Add-on `0.1.211`. Das Laden der Meslo-Schrift aus Home
+Die Theme-Auswahl wurde mit Framework `0.2.0-alpha.79` beziehungsweise
+Home-Assistant-App/Add-on `0.1.211` eingeführt. Das sind getrennte Versionsreihen.
+Ab Plugin `0.1.10` nennt `compatibility.atlas` ausdrücklich die App/Runtime:
+`>=0.1.215 <0.2.0`. Die bisherige Framework-Angabe war in diesem Feld falsch.
+Host `administration-local` und Home Assistant `>=2026.8` bleiben erforderlich.
+Bestehende gemeinsame Plugin-Einträge benötigen vor einer Korrektur eine Sicherung
+und eine Prüfung ihrer Revision; ein Repository-Refresh allein ändert sie nicht.
+Rücksicherungen behalten ihre ursprünglichen Anforderungen und werden bei einem
+Widerspruch weiterhin gesperrt. Das Laden der Meslo-Schrift aus Home
 Assistant benötigt mindestens Add-on `0.1.214` und die Dateien
 `MesloLGMNerdFontMono-Regular.ttf` sowie `MesloLGMNerdFontMono-Bold.ttf` unter
 `/config/www/fonts/` oder direkt unter `/config/www/`.

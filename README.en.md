@@ -14,6 +14,13 @@ Oh My Posh symbols have been observed rendering correctly on one computer but in
 
 ## Setup and security
 
+Since plugin 0.1.10, `compatibility.atlas` refers to App/runtime
+`>=0.1.215 <0.2.0`, not the historical framework alpha version. Host
+`administration-local` and Home Assistant `>=2026.8` are unchanged. Back up and
+revision-check existing shared descriptors before correcting them; refreshing
+the catalog alone does not repair them. Recovery snapshots keep their original
+requirements and remain blocked when incompatible.
+
 Add the plugin through [ATLAS Administration](https://rockbaer2007.github.io/atlas-terminal-plugin/install.html). The terminal is disabled by default and requires a strong, random token of at least 32 URL-safe characters on the ATLAS host. The token stays in local browser storage and is sent during connection setup through the WebSocket subprotocol, not in a URL. Use the terminal only in a trusted browser profile; local shell access has the permissions of the ATLAS process.
 
 Optional SSH must be configured on the server with a host, user, private key and `known_hosts` file. Host-key verification stays enabled and the browser cannot choose an arbitrary target.

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.10
+
+- Correct `compatibility.atlas` to the App/runtime range `>=0.1.215 <0.2.0`;
+  the previous framework alpha version was a different version identity.
+- Publish the same constraints in the catalog, package descriptor and manifest.
+  Keep the existing host and Home Assistant requirements.
+- Keep frontend behavior, terminal credentials and browser preferences unchanged.
+- Include each package asset once. Existing shared descriptors need a backed-up,
+  revision-checked correction; refreshing the catalog alone does not repair them.
+
 ## 0.1.9
 
 - Standardize the Plugin Hub and language controls in the upper-right toolbar and match the ATLAS theme.

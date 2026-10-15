@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { dirname,join,resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const read=async path=>JSON.parse(await readFile(join(root,path),'utf8'));
+const manifest=await read('plugins/terminal/atlas-plugin.json');
+const pkg=await read('plugins/terminal/atlas-plugin-terminal.atlas-plugin.json');
+const catalog=(await read('repository.json')).plugins.find(p=>p.id===manifest.id);
+const metadata=await read('package.json');
+assert.equal(pkg.plugin.version,manifest.version);assert.equal(catalog.version,manifest.version);assert.equal(metadata.version,manifest.version);
+assert.deepEqual(pkg.plugin.compatibility,manifest.compatibility);assert.deepEqual(catalog.compatibility,manifest.compatibility);
+assert.equal(manifest.compatibility.atlas,'>=0.1.215 <0.2.0');
+assert.equal(manifest.compatibility.host,'administration-local');
+assert.equal(manifest.compatibility.homeAssistant,'>=2026.8');
+const names=pkg.files.map(f=>f.path);assert.equal(new Set(names).size,names.length,'Duplicate package paths');
+for(const file of pkg.files){const actual=Buffer.from(file.content,file.contentEncoding==='base64'?'base64':'utf8');assert.deepEqual(actual,await readFile(join(root,'plugins/terminal',file.path)),file.path);}
+const embedded=JSON.parse(pkg.files.find(f=>f.path==='atlas-plugin.json').content);
+assert.deepEqual(embedded,manifest);
+console.log(`Terminal ${manifest.version}: catalog, descriptor, embedded manifest and ${names.length} unique asset bytes agree.`);

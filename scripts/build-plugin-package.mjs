@@ -6,7 +6,6 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const pluginDirectory = join(root, "plugins", "terminal");
 const packagePath = join(pluginDirectory, "atlas-plugin-terminal.atlas-plugin.json");
 const plugin = JSON.parse(await readFile(join(pluginDirectory, "atlas-plugin.json"), "utf8"));
-const readme = await readFile(join(pluginDirectory, "README.md"), "utf8");
 const includedFiles = [
   ["atlas-plugin.json", "application/json"],
   ["README.md", "text/markdown"],
@@ -29,11 +28,11 @@ const packageFile = {
     description: plugin.description,
     descriptionI18n: plugin.descriptionI18n,
     icon: plugin.icon,
+    compatibility: plugin.compatibility,
     extensionPoints: [],
     provides: plugin.capabilities,
   },
   files: [
-    { path: "README.md", mediaType: "text/markdown", content: readme },
     ...await Promise.all(includedFiles.map(async ([name, mediaType]) => ({
       path: name,
       mediaType,
